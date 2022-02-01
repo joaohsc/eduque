@@ -1,0 +1,2 @@
+# eduque
+projeto pra ufrn
