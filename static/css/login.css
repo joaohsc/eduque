@@ -1,0 +1,12 @@
+.login-section{
+    min-height: 100vh;
+}
+
+.login-icon{
+    width:100px;
+    height:auto;
+}
+
+login-input{
+    max-width:400px;
+}

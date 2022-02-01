@@ -1,0 +1,15 @@
+body {
+    font-family: 'Nunito'!important;
+}
+.bg-w-color{
+    background-color: #f9eff3;
+}
+.bg-p-color{
+    background-color: #f97c90;
+}
+
+.conteudo-centro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
