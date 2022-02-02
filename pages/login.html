@@ -15,10 +15,19 @@
 </head>
 
 <body>
-    <section class="login-section bg-w-color">
-        <div class="login-box text-center">
-            <img class="login-icon" src="/static/media/logo-rosa-c.png" alt="logo-eduque">
-            <h3>Entre na plataforma</h3>
+    <nav class="navbar fixed-top bg-p-color justify-content-between">
+        <img  class="m-2 nav-logo" src="/static/media/logo-f.png" alt="logo-eduque">
+        <div class="m-2">
+            <a class="elink-nav" href="home.html">home</a>
+        </div>
+      </nav>
+    <section class="login-section bg-w-color d-flex justify-content-center align-items-center flex-column">
+        <div class="login-box">
+            <div class="text-center">
+                <img class="login-icon mb-3" src="/static/media/logo-rosa-c.png" alt="logo-eduque">
+                <h3 class="mb-3">Entre na plataforma</h3>
+            </div>
+            
             <div class="login-input">
                 <form>
                     <div class="mb-3">
@@ -29,11 +38,13 @@
                       <label for="senha" class="form-label">Senha</label>
                       <input type="password" class="form-control" id="senha">
                     </div>
-                    <button type="submit" class="btn btn-primary">Entrar</button>
+                    <button type="submit" class="btn-eduque btn-login btn-eduque-hover">Entrar</button>
                   </form>
             </div>
-        </div>        
+        </div>      
+        
     </section>
+    <footer class="bg-w-color login-footer d-flex justify-content-center txt-e-black"><span>2017–2021 Eduque</span></footer>  
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
 </body>

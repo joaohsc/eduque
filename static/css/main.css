@@ -7,9 +7,41 @@ body {
 .bg-p-color{
     background-color: #f97c90;
 }
+.txt-e-black{
+    color: #212529
+}
+.txt-e-white{
+    color:#f9eff3
+}
 
-.conteudo-centro{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.btn-eduque{
+    background-image: linear-gradient(to right, #FAAD96,#F97C90 , #F84988);
+    color: #ffffff;
+    transition: all 0.5s;
+    padding: 20px;
+    display: inline-block;
+    border-radius: 4px;
+    border: none;
+    text-align: center;
+    padding: 10px;
+    transition: 1s;
+    cursor: pointer;
+}
+.btn-eduque:hover{
+    background-image: linear-gradient(to right, #F97C90, #F97C90);
+}
+
+.nav-logo{
+    width:135px;
+    height: auto;
+}
+.elink-nav{
+    color:#f9eff3;
+    text-decoration: none;
+    font-size: 18px;
+}
+.elink-nav:hover{
+    color: #dbdbdb;
+    text-decoration: none;
+    cursor: pointer;
 }

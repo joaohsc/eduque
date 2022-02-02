@@ -1,5 +1,8 @@
 .login-section{
-    min-height: 100vh;
+    min-height: 95vh;
+}
+.login-footer{
+    min-height: 5vh;
 }
 
 .login-icon{
@@ -7,6 +10,9 @@
     height:auto;
 }
 
-login-input{
-    max-width:400px;
+.login-box{
+    min-width:400px;
+}
+.btn-login{
+    width:100%;
 }
