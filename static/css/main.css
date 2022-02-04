@@ -7,11 +7,18 @@ body {
 .bg-p-color{
     background-color: #f97c90;
 }
+.bg-gp-color{
+    background-image: linear-gradient(to right,#F97C90 , #F84988);
+}
+
 .txt-e-black{
     color: #212529
 }
 .txt-e-white{
     color:#f9eff3
+}
+.txt-e-r{
+    color:#da3838
 }
 
 .btn-eduque{
@@ -42,6 +49,48 @@ body {
 }
 .elink-nav:hover{
     color: #dbdbdb;
+    text-decoration: none;
+    cursor: pointer;
+}
+.nav-icon{
+    width:44px;
+    height: auto;
+}
+.corpo{
+    width:100%;
+    display: flex;
+}
+.menu{
+    width:15vw;
+}
+.corpo-main{
+    width:95vw;
+}
+
+.menu-ul{
+    list-style-type: none;
+    padding:0;
+}
+
+.menu-list{
+    border-bottom: 1px solid;
+    border-color: #d6cccc;
+}
+
+.elink-menu{
+    padding:15px 5px 15px 5px;
+    color:#f9eff3;
+    text-decoration: none;
+    font-size: 16px;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+.elink-menu:hover {
+    color:#f9eff3;
+    background-color: #F84988;
     text-decoration: none;
     cursor: pointer;
 }
