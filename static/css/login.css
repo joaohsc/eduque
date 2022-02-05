@@ -1,6 +1,7 @@
 .login-icon{
     width:100px;
     height:auto;
+    border-radius: 100%;
 }
 
 .login-box{
@@ -8,4 +9,7 @@
 }
 .btn-login{
     width:100%;
+}
+.login-paginate{
+    width: 100%;
 }

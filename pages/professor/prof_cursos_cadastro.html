@@ -11,12 +11,11 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
 
     <!-- *único -->
-    <link rel="stylesheet" href="/static/css/aula.css">
+    <link rel="stylesheet" href="/static/css/login.css">
 
 </head>
 
 <body>
-
     <section class="corpo">
         <section class="menu bg-gp-color">
             <img class="m-2 nav-logo" src="/static/media/logo-f.png" alt="logo-eduque">
@@ -32,37 +31,35 @@
             </ul>
         </section>
         <section class="corpo-main">
-            <section class="mains-padding main-section bg-w-color">
-                <div class="row">
-                    <div class="mb-3">
-                        <a class="elink-paginate mb-3" href="prof_aulas.html">Voltar para as aulas</a>
-                        <h3 class="emain-title mb-3">Introdução ao HTML</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Rutrum quisque non tellus orci ac auctor augue mauris augue.
-                            Massa ultricies mi quis hendrerit dolor magna. </p>
+            <section class="mains-padding main-section bg-w-color d-flex justify-content-center ">
+                
+                <div class="login-box ">
+                    <div class="login-paginate mb-5">
+                        <a class="elink-paginate" href="prof_cursos.html">Voltar para os cursos</a>
+                    </div>
+                    <div class="text-center">                        
+                        <h3 class="mb-3">Cadastrar Curso</h3>
                     </div>
 
-                    <div class="text-center mb-5">
-                        <a class="aula-btn-paginate" href="#">Aula anterior</a>
-                        <a class="aula-btn-paginate" href="#">Próxima Aula</a>
-                    </div>
-                    <div class="aula-video text-center mb-5">
-                        <iframe width="420" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                        </iframe>
-                    </div>
-                    <div class="complementar-content ">
-                        <h4 class="mb-3">Conteúdo Complementar</h4>
-                        <div class="complementar-txt">
-                            <!-- botar links aqui, se puder imprimir com quebra de linha era bom -->
-                            <p>Lorem ipsum dolor sit ametconsectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Rutrum quisque non tellus orci ac auctor augue mauris
-                                augue. Massa ultricies mi quis hendrerit dolor magna. Lorem ipsum dolor sit amet,
-                                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                aliqua. Rutrum quisque non tellus orci ac auctor augue mauris augue. Massa ultricies mi
-                                quis hendrerit </p>
-                        </div>
+                    <div class="login-input">
+                        <form>
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Título</label>
+                                <input class="form-control" id="nome">
+                            </div>
+                            <div class="mb-3">
+                                <label for="txtdesc" class="form-label">Descrição</label>
+                                <textarea class="form-control" id="txtdesc"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="capa" class="form-label">Imagem de capa</label><br>
+                                <input type="file" id="capa" name="capa" accept="image/png, image/jpeg">
+                            </div>
+                            <button type="submit" class="btn-eduque btn-login btn-eduque-hover">Entrar</button>
+                        </form>
                     </div>
                 </div>
+
             </section>
             <footer class="bg-w-color main-footer d-flex justify-content-center txt-e-black"><span>2017–2021
                     Eduque</span>
