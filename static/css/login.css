@@ -6,6 +6,7 @@
 
 .login-box{
     min-width:400px;
+    max-width: 500px;
 }
 .btn-login{
     width:100%;
