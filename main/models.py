@@ -5,7 +5,7 @@ from django.urls import reverse
 class Materia(models.Model):
     titulo = models.CharField("Título",max_length=20, unique=True)
     descricao = models.TextField("Descrição")
-    imagem = models.ImageField(upload_to='materia/', verbose_name="imagem")
+    imagem = models.ImageField(upload_to='materia/', verbose_name="imagem", blank=True)
 
     def get_absolute_url(self):
         return reverse('listagem_curso', kwargs={'pk' : self.pk})
@@ -20,7 +20,7 @@ class Materia(models.Model):
 class Curso(models.Model):
     titulo = models.CharField("Título",max_length=50)
     descricao = models.TextField("Descrição")
-    imagem = models.ImageField(upload_to='materia/', verbose_name="imagem")
+    imagem = models.ImageField(upload_to='materia/', verbose_name="imagem", blank=True)
     materia = models.ForeignKey(Materia, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
@@ -57,8 +57,8 @@ class Evento(models.Model):
     data = models.DateField()
     descricao = models.TextField("Descrição")
     link = models.CharField("Site do evento",max_length=300)
-    imagem = models.ImageField(upload_to='materia/', verbose_name="imagem")
-    inscritos = models.ManyToManyField(User)
+    imagem = models.ImageField(upload_to='materia/', verbose_name="imagem", blank=True)
+    inscritos = models.ManyToManyField(User, blank=True)
     num_inscritos = models.IntegerField(verbose_name="Número de Inscritos", default=0)
 
     def get_absolute_url(self):

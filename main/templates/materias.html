@@ -11,7 +11,9 @@
     {%for materia in materias %}
         <p><a href="{{ materia.get_absolute_url }}">{{ materia.titulo }}</a></p>
         <p>{{ materia.descricao }}</p>
-        <p><img src="{{ materia.imagem.url }}" alt=""></p>
+        {% if materia.imagem %}
+            <p><img src="{{ materia.imagem.url }}" alt=""></p>
+        {% endif %}
     {% endfor %}
 </body>
 </html>

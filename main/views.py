@@ -30,7 +30,7 @@ def registro(request):
     }
 
     return render(request, 'registro.html', context)
-
+#views da classe Materia
 def MateriaList(request):
     materias = Materia.objects.all()
     context={
@@ -48,6 +48,25 @@ def CursoList(request, pk):
     }
     return render(request, 'materia.html', context)
 
+@method_decorator(login_required, name='dispatch')
+class MateriaCreate(CreateView):
+    model = Materia
+    fields = ['titulo', 'descricao', 'imagem']
+    template_name = 'aula_form.html'
+
+@method_decorator(login_required, name='dispatch')
+class MateriaUpdate(UpdateView):
+    model = Materia
+    fields = ['titulo', 'descricao', 'imagem']
+    template_name = 'aula_form.html'
+
+@method_decorator(login_required, name='dispatch')  
+class MateriaDelete(DeleteView):
+    model = Materia
+    template_name = 'aula_form.html'
+    success_url = reverse_lazy('listagem_materia')
+
+#views da classe Curso
 def AulaList(request, pk):
     pk = pk
     curso = get_object_or_404(Curso, pk=pk) 
@@ -57,6 +76,24 @@ def AulaList(request, pk):
         'aulas' : aulas,
     }
     return render(request, 'aulas.html', context)
+
+@method_decorator(login_required, name='dispatch')
+class CursoCreate(CreateView):
+    model = Curso
+    fields = ['titulo', 'descricao', 'imagem', 'materia']
+    template_name = 'aula_form.html'
+
+@method_decorator(login_required, name='dispatch')
+class CursoUpdate(UpdateView):
+    model = Curso
+    fields = ['titulo', 'descricao', 'imagem', 'materia']
+    template_name = 'aula_form.html'
+
+@method_decorator(login_required, name='dispatch')  
+class CursoDelete(DeleteView):
+    model = Curso
+    template_name = 'aula_form.html'
+    success_url = reverse_lazy('listagem_materia')
 
 #views da classe Aula
 @method_decorator(login_required, name='dispatch')
@@ -83,6 +120,7 @@ class AulaDelete(DeleteView):
     template_name = 'aula_form.html'
     success_url = reverse_lazy('listagem_materia')
 
+#views da classe Evento
 @method_decorator(login_required, name='dispatch')
 class EventoDetail(generic.DetailView):
     model = Evento
@@ -97,3 +135,20 @@ class EventoList(generic.ListView):
     def get_queryset(self):
         return Evento.objects.all
 
+@method_decorator(login_required, name='dispatch')
+class EventoCreate(CreateView):
+    model = Evento
+    fields = ['titulo','data', 'descricao', 'link', 'imagem']
+    template_name = 'aula_form.html'
+
+@method_decorator(login_required, name='dispatch')
+class EventoUpdate(UpdateView):
+    model = Evento
+    fields = ['titulo','data', 'descricao', 'link', 'imagem']
+    template_name = 'aula_form.html'
+
+@method_decorator(login_required, name='dispatch')  
+class EventoDelete(DeleteView):
+    model = Evento
+    template_name = 'aula_form.html'
+    success_url = reverse_lazy('listagem_evento')
