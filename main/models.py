@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
-
-# Create your models here.
 class Materia(models.Model):
-    titulo = models.CharField("Título",max_length=20)
+    titulo = models.CharField("Título",max_length=20, unique=True)
     descricao = models.TextField("Descrição")
     imagem = models.ImageField(upload_to='materia/', verbose_name="imagem")
+
+    def get_absolute_url(self):
+        return reverse('listagem_curso', kwargs={'pk' : self.pk})
 
     class Meta:
         verbose_name = 'Matéria'
@@ -20,6 +22,10 @@ class Curso(models.Model):
     descricao = models.TextField("Descrição")
     imagem = models.ImageField(upload_to='materia/', verbose_name="imagem")
     materia = models.ForeignKey(Materia, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('listagem_aula', kwargs={'pk' : self.pk})
+
     class Meta:
         verbose_name = 'Curso'
         verbose_name_plural = 'Cursos'
@@ -34,6 +40,10 @@ class Aula(models.Model):
     conteudo = models.TextField("Conteúdo complementar")
     imagem = models.ImageField(upload_to='materia/', verbose_name="imagem")
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('detalhe_aula', kwargs={'pk' : self.pk})
+
 
     class Meta:
         verbose_name = 'Aula'
@@ -50,6 +60,9 @@ class Evento(models.Model):
     imagem = models.ImageField(upload_to='materia/', verbose_name="imagem")
     inscritos = models.ManyToManyField(User)
     num_inscritos = models.IntegerField(verbose_name="Número de Inscritos", default=0)
+
+    def get_absolute_url(self):
+        return reverse('detalhe_evento', kwargs={'pk' : self.pk})
 
     class Meta:
         verbose_name = 'Evento'
