@@ -9,7 +9,7 @@
     <title>Cadastro</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
         <!-- João, aqui é só um exemplo, faça um template desses por acão = aula_update, aula_delete... -->
