@@ -38,7 +38,7 @@ class Aula(models.Model):
     descricao = models.TextField("Descrição")
     link = models.CharField("Link da Aula",max_length=300)
     conteudo = models.TextField("Conteúdo complementar")
-    imagem = models.ImageField(upload_to='materia/', verbose_name="imagem")
+    imagem = models.ImageField(upload_to='materia/', verbose_name="imagem", blank=True)
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
 
     def get_absolute_url(self):

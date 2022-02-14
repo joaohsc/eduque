@@ -14,6 +14,9 @@ urlpatterns = [
     #views da aula
     path('materia/curso/<int:pk>', views.AulaList, name='listagem_aula'),
     path('materia/curso/aula/<int:pk>', views.AulaDetail.as_view(), name='detalhe_aula'),
+    path('materia/curso/aula/cadastro', views.AulaCreate.as_view(), name='cadastrar_aula'),
+    path('materia/curso/aula/atualização/<int:pk>/', views.AulaUpdate.as_view(), name='atualizar_aula'),
+    path('author/<int:pk>/delete/',views.AulaDelete.as_view(), name='deletar_aula'),
     #views do evento
     path('eventos/', views.EventoList.as_view(), name='listagem_evento'),
     path('evento/<int:pk>', views.EventoDetail.as_view(), name='detalhe_evento'),

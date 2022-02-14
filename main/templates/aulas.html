@@ -8,10 +8,14 @@
     <title>Materia</title>
 </head>
 <body>
+    <h1>{{ curso.titulo }}</h1>
     {%for aula in aulas %}
         <p><a href="{{ aula.get_absolute_url }}">{{ aula.titulo }}</a></p>
         <p>{{ aula.descricao }}</p>
-        <p><img src="{{ aula.imagem.url }}" alt=""></p>
+        {% if aula.imagem %}
+            <p><img src="{{ aula.imagem.url }}" alt=""></p>
+        {% endif %}
     {% endfor %}
+    <p><a href="{% url 'cadastrar_aula' %}">Cadastrar aula</a></p>
 </body>
 </html>
