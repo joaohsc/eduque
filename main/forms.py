@@ -5,7 +5,14 @@ from django import forms
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
+    
+    TIPO_DE_USUARIO = [
+        ('ALUNO', 'Aluno'),
+        ('EMPRESA', 'Empresa'),
+        ('PROFESSOR', 'Professor'),
+    ]
+    tipo_de_usuario = forms.ChoiceField(choices = TIPO_DE_USUARIO)
 
     class Meta: 
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'tipo_de_usuario', 'password1', 'password2']
