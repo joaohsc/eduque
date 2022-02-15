@@ -8,17 +8,10 @@
     <title>Home</title>
 </head>
 <body>
-    {% if messages %}
-        {% for message in massages %}
-            <div class="alert alert-{{message.tag}}">{{ massage }}</div>
-        {% endfor %}
-    {% endif %}
-    <h1>pagina inicial</h1>
+    <h1>pagina inicial - Empressa/Professor </h1>
     {% if user.is_authenticated %}
         <h3>Bem vindo, {{user.username}} - {{user.email}}</h3>
         <h5><a href="{% url 'logout' %}">Logout</a></h5>
-    {% else %}
-        <h5><a href="{% url 'login' %}">Login</a></h5>
     {% endif %}
 </body>
 </html>
