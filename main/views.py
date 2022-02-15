@@ -2,15 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.contrib.auth.models import Group
 from .forms import UserRegisterForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import *
-from django.contrib.auth import views as auth_view
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
 from .decorators import *
 
 @login_required(login_url='login')
