@@ -28,9 +28,15 @@ def registro(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            usuario = form.cleaned_data.get('usuario')
-            messages.success(request, f'{usuario}, sua conta foi criada com sucesso!') 
+            user = form.save()
+            tipo_usuario = form.cleaned_data.get('tipo_de_usuario')
+            if tipo_usuario == 'ALUNO':
+                group = Group.objects.get(name='aluno')
+                user.groups.add(group)
+            else:
+                group = Group.objects.get(name='administrador')
+                user.groups.add(group)
+            
             return redirect('index')
     else:
         form = UserRegisterForm()

@@ -8,7 +8,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('registro/', views.registro, name='registro'),
     path('login/', unauthenticated_user(auth_view.LoginView.as_view(template_name='login.html')), name='login'),
-    path('logout/', authenticated_user(auth_view.LogoutView.as_view(template_name='logout.html')), name='logout'),
+    path('logout/', authenticated_user(auth_view.LogoutView.as_view(template_name='login.html')), name='logout'),
     #views da matéria
     path('materias/', views.MateriaList, name='listagem_materia'),
     path('materia/cadastro/', views.MateriaCreate.as_view(), name='cadastrar_materia'),
