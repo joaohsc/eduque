@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.models import Group
-from .forms import UserRegisterForm
+from .forms import *
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -20,6 +20,32 @@ def index(request):
             return render(request, 'aluno/aluno_home.html')
         else:
             return render(request, 'index2.html')
+    else:
+        return redirect('login')
+
+@login_required(login_url='login')
+def perfil(request):
+    if request.user.groups.exists():
+        group = request.user.groups.all()[0].name
+        user = request.user
+        form = UserUpdateForm(instance=user)
+
+        if request.method == "POST":
+            form = UserUpdateForm(data=request.POST, instance=request.user)
+            if form.is_valid():
+                update = form.save(commit=False)
+                update.user = request.user
+                update.save()
+            
+        
+        context={
+            'user' : user,
+            'form' : form,
+        }
+        if group == 'aluno':
+            return render(request, 'index2.html', context)
+        else:
+            return render(request, 'index2.html', context)
     else:
         return redirect('login')
 

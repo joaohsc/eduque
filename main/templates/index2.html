@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load crispy_forms_tags %}
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -9,9 +10,14 @@
 </head>
 <body>
     <h1>pagina inicial - Empressa/Professor </h1>
-    {% if user.is_authenticated %}
-        <h3>Bem vindo, {{user.username}} - {{user.email}}</h3>
-        <h5><a href="{% url 'logout' %}">Logout</a></h5>
+    <h3>Bem vindo, {{user.username}} - {{user.email}}</h3>
+    {% if form %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="atualizar">
+        </form>
     {% endif %}
+    <h5><a href="{% url 'logout' %}">Logout</a></h5>
 </body>
 </html>

@@ -16,3 +16,11 @@ class UserRegisterForm(UserCreationForm):
     class Meta: 
         model = User
         fields = ['username', 'email', 'tipo_de_usuario', 'password1', 'password2']
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+    password1 = forms.CharField(widget=forms.PasswordInput(), label='Senha')
+    password2 = forms.CharField(widget=forms.PasswordInput(), label='Confirmação de Senha')
+    class Meta: 
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']

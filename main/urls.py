@@ -6,6 +6,7 @@ from .decorators import *
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('perfil/', views.perfil, name='perfil'),
     path('registro/', views.registro, name='registro'),
     path('login/', unauthenticated_user(auth_view.LoginView.as_view(template_name='login.html')), name='login'),
     path('logout/', authenticated_user(auth_view.LogoutView.as_view(template_name='login.html')), name='logout'),
