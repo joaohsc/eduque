@@ -17,11 +17,11 @@ def index(request):
     if request.user.groups.exists():
         group = request.user.groups.all()[0].name
         if group == 'aluno':
-            return render(request, 'index1.html')
+            return render(request, 'aluno/aluno_home.html')
         else:
             return render(request, 'index2.html')
     else:
-        return redirect('login.html')
+        return redirect('login')
 
 @unauthenticated_user
 def registro(request):

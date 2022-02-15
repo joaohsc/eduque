@@ -1,0 +1,16 @@
+.login-icon{
+    width:100px;
+    height:auto;
+    border-radius: 100%;
+}
+
+.login-box{
+    min-width:400px;
+    max-width: 500px;
+}
+.btn-login{
+    width:100%;
+}
+.login-paginate{
+    width: 100%;
+}

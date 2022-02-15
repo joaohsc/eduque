@@ -1,0 +1,14 @@
+.materia-card{
+    background-color: #ffffff;
+    border-radius: 6px;
+    border: 1px solid;
+    border-color: #fbfbfb;
+    padding: 15px;
+}
+
+.materia-img{
+    width:100%;
+    height:150px;
+    object-fit: cover;
+    border-radius: 6px;
+}

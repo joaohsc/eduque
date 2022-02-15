@@ -1,0 +1,16 @@
+{% load static %}
+<section class="menu bg-gp-color">
+    <img class="m-2 nav-logo" src="/static/media/logo-f.png" alt="logo-eduque">
+    <ul class="menu-ul">
+        <li class="menu-list"><a class="elink-menu" href="home.html"><img class="menu-icon"
+                    src="/static/media/home.png" alt="icone-home">Página Inicial</a></li>
+        <li class="menu-list"><a class="elink-menu" href="materia.html"><img class="menu-icon"
+                    src="/static/media/materia.png" alt="icone-home"> Matéria</a></li>
+        <li class="menu-list"><a class="elink-menu" href="evento.html"><img class="menu-icon"
+                    src="/static/media/evento.png" alt="icone-home"> Evento</a></li>
+        <li class="menu-list"><a class="elink-menu" href="evento.html"><img class="menu-icon"
+                    src="/static/media/people.png" alt="icone-home"> Meu perfil</a></li>
+        <li class="menu-list"><a class="elink-menu" href="{% url 'logout' %}"><img class="menu-icon"
+                    src="{% static '/media/sair.png' %}" alt="icone-home"> Sair</a></li>
+    </ul>
+</section>
