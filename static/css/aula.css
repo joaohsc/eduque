@@ -1,0 +1,22 @@
+.aula-btn-paginate{
+    color:#F84988;
+    text-decoration: none;
+    font-size: 18px;
+    border:1px solid;
+    border-color: #F84988;
+    padding: 10px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+.aula-btn-paginate:hover {
+    color:#f9eff3;
+    background-color: #F84988;
+    text-decoration: none;
+    cursor: pointer;
+}
+.complementar-txt{
+    border:1px solid;
+    border-color: #F84988;
+    padding: 10px;
+    border-radius: 6px;
+}

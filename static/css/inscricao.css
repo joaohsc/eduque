@@ -1,0 +1,12 @@
+.capa_inscricao{
+    width:100%;
+    height:200px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.txt-inscricao{
+    font-size: 16px;
+    padding-left: 20px;
+    max-width: 800px;
+}
