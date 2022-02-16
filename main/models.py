@@ -5,7 +5,7 @@ from django.urls import reverse
 class Materia(models.Model):
     titulo = models.CharField("Título",max_length=20, unique=True)
     descricao = models.TextField("Descrição")
-    imagem = models.ImageField(upload_to='materia/', verbose_name="imagem", blank=True)
+    imagem = models.ImageField(upload_to='media/materia/', verbose_name="imagem")
 
     def get_absolute_url(self):
         return reverse('listagem_curso', kwargs={'pk' : self.pk})
