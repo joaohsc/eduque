@@ -1,0 +1,40 @@
+{% extends 'shared/aluno_base.html' %}
+{% load static %}
+
+{% block head_links %}
+    <link rel="stylesheet" href="{% static '/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="corpo">
+    {% include 'shared/aluno_navbar.html' %}
+
+    <section class="corpo-main">
+        <section class="mains-padding main-section d-flex justify-content-center align-items-center flex-column bg-w-color">
+            <div class="home-title d-flex justify-content-start">
+                <h3>
+                    <img class="home-icon mb-3" src="{% static '/media/logo-rosa-c.png' %}" alt="logo-eduque">
+                    <strong>Bem vindo, {{user.username}}</strong>
+                </h3>
+            </div>
+            <div class="home-content d-flex justify-content-center">
+                <div class="home-sectiont">
+                    <h3><strong>Vamos inovar a educação?</strong></h3>
+                    <p class="txt-e-black">Aqui na Eduque! você possui várias ferramentas para capacitar seus estudantes
+                        Vai topar esse desafio?</p>
+                    <p class="txt-e-black mb-5">Então vamos começar!</p>
+                    <a class="ebutton" href="{% url 'listagem_materia' %}">Ir para matérias</a>
+                </div>
+                <div class="home-sectionf">
+                    <img class="home-figure mb-3" src="{% static 'media/home-figure.png' %}"
+                        alt="imagem de móveis e uma garota">
+                </div>
+            </div>
+        </section>
+        <footer class="bg-w-color main-footer d-flex justify-content-center txt-e-black"><span>2017–2021
+                Eduque</span>
+        </footer>
+    </section>
+</section>
+
+{% endblock %}

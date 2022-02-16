@@ -19,7 +19,7 @@ def index(request):
         if group == 'aluno':
             return render(request, 'aluno/aluno_home.html')
         else:
-            return render(request, 'professor/professor_home.html')
+            return render(request, 'professor/prof_home.html')
     else:
         return redirect('login')
 
@@ -45,7 +45,7 @@ def perfil(request):
         if group == 'aluno':
             return render(request, 'aluno/aluno_perfil.html', context)
         else:
-            return render(request, 'professor/professor_perfil.html', context)
+            return render(request, 'professor/prof_perfil.html', context)
     else:
         return redirect('login')
 
@@ -87,7 +87,7 @@ def MateriaList(request):
         if group == 'aluno':
             return render(request, 'aluno/aluno_materia.html', context)
         else:
-            return render(request, 'professor/professor_materia.html', context)
+            return render(request, 'professor/prof_materia.html', context)
     else:
         return redirect('login')
     
@@ -106,7 +106,7 @@ def CursoList(request, materia_id):
         if group == 'aluno':
             return render(request, 'aluno/aluno_cursos.html', context)
         else:
-            return render(request, 'professor/professor_cursos.html', context)
+            return render(request, 'professor/prof_cursos.html', context)
         return render(request, 'materia.html', context)
     else:
         return redirect('login')
@@ -152,7 +152,7 @@ def AulaList(request, materia_id, curso_id):
         if group == 'aluno':
             return render(request, 'aluno/aluno_aulas.html', context)
         else:
-            return render(request, 'professor/professor_aulas.html', context)
+            return render(request, 'professor/prof_aulas.html', context)
     else:
         return redirect('login')
 
@@ -197,7 +197,7 @@ def AulaDetail(request, materia_id, curso_id, aula_id):
         if group == 'aluno':
             return render(request, 'aluno/aluno_aula.html', context)
         else:
-            return render(request, 'professor/professor_aula.html', context)
+            return render(request, 'professor/prof_aula.html', context)
     else:
         return redirect('login')
 
@@ -223,27 +223,54 @@ class AulaDelete(DeleteView):
     success_url = reverse_lazy('listagem_materia')
 
 #views da classe Evento
-@method_decorator(login_required(login_url='login'), name='dispatch')
-@method_decorator(allowed_users(allowed_roles=['administrador', 'aluno']), name='dispatch') 
-class EventoDetail(generic.DetailView):
-    model = Evento
-    template_name = 'evento.html'
-    queryset_name = 'evento'
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['administrador', 'aluno'])
+def EventoDetail(request, pk):
+    if request.user.groups.exists():
+        evento = get_object_or_404(Evento, id=pk) 
+        context={
+            'evento' : evento,
+        }
+        group = request.user.groups.all()[0].name
+        if group == 'aluno':
+            return render(request, 'aluno/aluno_inscricao.html', context)
+        else:
+            return render(request, 'professor/prof_inscricao.html', context)
+    else:
+        return redirect('login')
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['administrador', 'aluno'])
+def InscricaoList(request):
+    #EXEMPLO APENAS PARA PREENCHER A PÁGINA DE LISTA DE INSCRIÇÕES
+
+    if request.user.groups.exists():
+        eventos = Evento.objects.all() 
+        context={
+            'eventos' : eventos,
+        }
+        group = request.user.groups.all()[0].name
+        if group == 'aluno':
+            return render(request, 'aluno/aluno_inscricoes.html', context)
+        else:
+            return render(request, 'professor/prof_inscricoes.html', context)
+    else:
+        return redirect('login')
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['administrador', 'aluno'])
 def EventoList(request): 
     if request.user.groups.exists():
-        materias = Evento.objects.all()
+        eventos = Evento.objects.all()
         context={
-            'materias' : materias,
+            'eventos' : eventos,
         }
     
         group = request.user.groups.all()[0].name
         if group == 'aluno':
             return render(request, 'aluno/aluno_eventos.html', context)
         else:
-            return render(request, 'professor/professor_eventos.html', context)
+            return render(request, 'professor/prof_eventos.html', context)
     else:
         return redirect('login')
     

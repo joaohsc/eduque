@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block head_links %}
-<link rel="stylesheet" href="/static/css/materia.css">
+    <link rel="stylesheet" href="{% static '/css/materia.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -15,25 +15,25 @@
                     <div class="d-flex justify-content-between">
                         <h3 class="emain-title">Eventos</h3>
                         <div>
-                            <a class="ebuttontiny" href="inscricoes.html">Inscrições</a>
+                            <a class="ebuttontiny" href="{% url 'listagem_inscricoes' %}">Inscrições</a>
                         </div>
 
                     </div>
 
                 </div>
+                {% for e in eventos %}
                 <div class="col-md-4 mb-4">
                     <div class="materia-card">
-                        <img class="materia-img mb-3" src="/static/media/logo-rosa-s.png" alt="logo-eduque">
-                        <h5>25 de Jan - 02 de Fev</h5>
-                        <h4>Marketing Digital</h4>
-                        <p class="txt-e-black">Some quick example text to build on the card title and make up the
-                            bulk of the card's content.</p>
+                        <img class="materia-img mb-3" src="{{e.imagem.url}}" alt="logo-eduque">
+                        <h5>{{e.data}}</h5>
+                        <h4>{{e.titulo}}</h4>
+                        <p class="txt-e-black">{{e.descricao}}</p>
                         <div class="btn-box d-flex">
-                            <a class="ebuttontiny" href="inscricao.html">Inscrever-se</a>
+                            <a class="ebuttontiny" href="{% url 'detalhe_evento' e.id %}">Inscrever-se</a>
                         </div>
                     </div>
                 </div>
-
+                {% endfor %}
             </div>
         </section>
         <footer class="bg-w-color main-footer d-flex justify-content-center txt-e-black"><span>2017–2021

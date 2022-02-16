@@ -19,30 +19,6 @@
                 </div>
 
                 <div class="login-input">
-                    <!-- <form>
-                        <div class="mb-3">
-                            <label for="nome" class="form-label">Nome</label>
-                            <input class="form-control" id="nome" value="Teste da Silva">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" value="teste@gmail.com">
-                        </div>
-                        <div class="mb-3">
-                            <label for="senha" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id="senha">
-                        </div>
-                        <div class="mb-3">
-                            <label for="senha" class="form-label">Confirme senha</label>
-                            <input type="password" class="form-control" id="senha">
-                        </div>
-                        <div class="mb-3">
-                            <label for="capa" class="form-label">Imagem de perfil</label><br>
-                            <input type="file" id="capa" name="capa" accept="image/png, image/jpeg">
-                        </div>
-
-                        <button type="submit" class="btn-eduque btn-login btn-eduque-hover">Entrar</button>
-                    </form> -->
                     <form action="" method="post">
                         {% csrf_token %}
                         {{ form | crispy }}

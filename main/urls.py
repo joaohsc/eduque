@@ -28,8 +28,12 @@ urlpatterns = [
     path('materia/<int:materia_id>/<int:curso_id>/<int:aula_id>/deletar_aula/',views.AulaDelete.as_view(), name='deletar_aula'),
     #views do evento
     path('eventos/', views.EventoList, name='listagem_evento'),
-    path('evento/<int:pk>', views.EventoDetail.as_view(), name='detalhe_evento'),
+    path('evento/<int:pk>/', views.EventoDetail, name='detalhe_evento'),
     path('evento/cadastro/', views.EventoCreate.as_view(), name='cadastrar_evento'),
-    path('evento/atualização/<int:pk>/', views.EventoUpdate.as_view(), name='atualizar_evento'),
-    path('evento/<int:pk>/deletar/',views.EventoDelete.as_view(), name='deletar_evento'),
+    path('evento/editar/<int:pk>/', views.EventoUpdate.as_view(), name='atualizar_evento'),
+    path('evento/deletar/<int:pk>/',views.EventoDelete.as_view(), name='deletar_evento'),
+    
+    #views inscricao
+    path('eventos/inscricoes', views.InscricaoList, name='listagem_inscricoes'),
+
 ]
