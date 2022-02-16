@@ -19,7 +19,7 @@ def index(request):
         if group == 'aluno':
             return render(request, 'aluno/aluno_home.html')
         else:
-            return render(request, 'index2.html')
+            return render(request, 'professor/professor_home.html')
     else:
         return redirect('login')
 
@@ -43,9 +43,9 @@ def perfil(request):
             'form' : form,
         }
         if group == 'aluno':
-            return render(request, 'index2.html', context)
+            return render(request, 'aluno/aluno_perfil.html', context)
         else:
-            return render(request, 'index2.html', context)
+            return render(request, 'professor/professor_perfil.html', context)
     else:
         return redirect('login')
 
@@ -77,22 +77,39 @@ def registro(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['administrador', 'aluno'])
 def MateriaList(request):
-    materias = Materia.objects.all()
-    context={
-        'materias' : materias,
-    }
-    return render(request, 'materias.html', context)
+    if request.user.groups.exists():
+        materias = Materia.objects.all()
+        context={
+            'materias' : materias,
+        }
+    
+        group = request.user.groups.all()[0].name
+        if group == 'aluno':
+            return render(request, 'aluno/aluno_materia.html', context)
+        else:
+            return render(request, 'professor/professor_materia.html', context)
+    else:
+        return redirect('login')
+    
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['administrador', 'aluno'])
-def CursoList(request, pk):
-    pk = pk
-    materia = get_object_or_404(Materia, pk=pk) 
-    cursos = Curso.objects.filter(materia=pk)
-    context={
-        'cursos' : cursos,
-        'materia' : materia,
-    }
-    return render(request, 'materia.html', context)
+def CursoList(request, materia_id):
+    if request.user.groups.exists():
+        pk = materia_id
+        materia = get_object_or_404(Materia, pk=pk) 
+        cursos = Curso.objects.filter(materia=pk)
+        group = request.user.groups.all()[0].name
+        context={
+            'cursos' : cursos,
+            'materia' : materia,
+        }
+        if group == 'aluno':
+            return render(request, 'aluno/aluno_cursos.html', context)
+        else:
+            return render(request, 'professor/professor_cursos.html', context)
+        return render(request, 'materia.html', context)
+    else:
+        return redirect('login')
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador']), name='dispatch') 
@@ -118,15 +135,26 @@ class MateriaDelete(DeleteView):
 #views da classe Curso
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['administrador', 'aluno'])
-def AulaList(request, pk):
-    pk = pk
-    curso = get_object_or_404(Curso, pk=pk) 
-    aulas = Aula.objects.filter(curso=pk)
-    context={
-        'curso' : curso,
-        'aulas' : aulas,
-    }
-    return render(request, 'aulas.html', context)
+def AulaList(request, materia_id, curso_id):
+    if request.user.groups.exists():
+        
+        materia = get_object_or_404(Materia, id=materia_id) 
+        curso = get_object_or_404(Curso, id=curso_id) 
+        aulas = Aula.objects.filter(curso=curso_id)
+
+        context={
+            'materia' : materia,
+            'curso' : curso,
+            'aulas' : aulas,
+        }
+    
+        group = request.user.groups.all()[0].name
+        if group == 'aluno':
+            return render(request, 'aluno/aluno_aulas.html', context)
+        else:
+            return render(request, 'professor/professor_aulas.html', context)
+    else:
+        return redirect('login')
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador']), name='dispatch') 
@@ -150,12 +178,28 @@ class CursoDelete(DeleteView):
     success_url = reverse_lazy('listagem_materia')
 
 #views da classe Aula
-@method_decorator(login_required(login_url='login'), name='dispatch')
-@method_decorator(allowed_users(allowed_roles=['administrador', 'aluno']), name='dispatch') 
-class AulaDetail(generic.DetailView):
-    model = Aula
-    template_name = 'aula.html'
-    queryset_name = 'aula'
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['administrador', 'aluno'])
+def AulaDetail(request, materia_id, curso_id, aula_id):
+    if request.user.groups.exists():
+
+        materia = get_object_or_404(Materia, id=materia_id) 
+        curso = get_object_or_404(Curso, id=curso_id) 
+        aula = get_object_or_404(Aula,id=aula_id)
+
+        context={
+            'materia' : materia,
+            'curso' : curso,
+            'aula' : aula,
+        }
+    
+        group = request.user.groups.all()[0].name
+        if group == 'aluno':
+            return render(request, 'aluno/aluno_aula.html', context)
+        else:
+            return render(request, 'professor/professor_aula.html', context)
+    else:
+        return redirect('login')
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador']), name='dispatch') 
@@ -186,15 +230,23 @@ class EventoDetail(generic.DetailView):
     template_name = 'evento.html'
     queryset_name = 'evento'
 
-@method_decorator(login_required(login_url='login'), name='dispatch')
-@method_decorator(allowed_users(allowed_roles=['administrador', 'aluno']), name='dispatch') 
-class EventoList(generic.ListView):
-    template_name = 'eventos.html'
-    context_object_name = 'eventos'
-
-    def get_queryset(self):
-        return Evento.objects.all
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['administrador', 'aluno'])
+def EventoList(request): 
+    if request.user.groups.exists():
+        materias = Evento.objects.all()
+        context={
+            'materias' : materias,
+        }
+    
+        group = request.user.groups.all()[0].name
+        if group == 'aluno':
+            return render(request, 'aluno/aluno_eventos.html', context)
+        else:
+            return render(request, 'professor/professor_eventos.html', context)
+    else:
+        return redirect('login')
+    
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador']), name='dispatch') 
 class EventoCreate(CreateView):

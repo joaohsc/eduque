@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block head_links %}
-    <link rel="stylesheet" href="/static/css/home.css">
+    <link rel="stylesheet" href="{% static '/css/home.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
         <section class="mains-padding main-section d-flex justify-content-center align-items-center flex-column bg-w-color">
             <div class="home-title d-flex justify-content-start">
                 <h3>
-                    <img class="home-icon mb-3" src="/static/media/logo-rosa-c.png" alt="logo-eduque">
+                    <img class="home-icon mb-3" src="{% static '/media/logo-rosa-c.png' %}" alt="logo-eduque">
                     <strong>Bem vindo, {{user.username}}</strong>
                 </h3>
             </div>
@@ -24,7 +24,7 @@
                         para se preparar para o mercado de trabalho. O que acha?
                         Vai topar esse desafio?</p>
                     <p class="txt-e-black mb-5">Então bora começar selecionando as matérias!</p>
-                    <a class="ebutton" href="materias.html">Escolher matéria</a>
+                    <a class="ebutton" href="{% url 'listagem_materia' %}">Escolher matéria</a>
                 </div>
                 <div class="home-sectionf">
                     <img class="home-figure mb-3" src="{% static 'media/home-figure.png' %}"
