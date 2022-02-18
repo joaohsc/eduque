@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
 from .models import Evento
 from django import forms
 
@@ -29,4 +28,4 @@ class UserUpdateForm(forms.ModelForm):
 class InscriaoEvento(forms.ModelForm):
     class Meta:
         model = Evento
-        fields = ['inscritos'] 
+        fields = ['inscritos']

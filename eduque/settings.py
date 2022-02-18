@@ -24,9 +24,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-0_nck*)#hk)9a*ffl06d=(eosb*qlzby+lthr938ubx!fz4i95'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+# PRODUCTION = True
+
+# if PRODUCTION:
+#     DEBUG = True
+#     ALLOWED_HOSTS = []
+# else:
+DEBUG = True
+ALLOWED_HOSTS = ['bryoliver999.pythonanywhere.com', 'localhost']
 
 
 # Application definition
@@ -76,7 +82,18 @@ WSGI_APPLICATION = 'eduque.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
+# if PRODUCTION:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE' : 'django.db.backends.postgresql',
+#             'NAME' : 'DEMO_TEST',
+#             'USER' : 'postgres',
+#             'PASSWORD' : 'dinossauro99',
+#             'HOST' : 'localhost',
+#             'PORT' : '5432',
+#         }
+#     }
+# else:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -119,25 +136,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-#modificar para a URL de Deploy no futuro
-STATIC_ROOT = "localhost:8000/static/"
+STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'index'
 
 MEDIA_ROOT = (
-  os.path.join(BASE_DIR, 'media')
+    os.path.join(BASE_DIR, 'media')
 )
 
-MEDIA_URL = '/media/'
