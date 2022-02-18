@@ -28,7 +28,7 @@ urlpatterns = [
     path('materia/curso/aula/<int:pk>/deletar/',views.AulaDelete.as_view(), name='deletar_aula'),
     #views do evento
     path('eventos/', views.EventoList.as_view(), name='listagem_evento'),
-    path('evento/<int:pk>', views.EventoDetail.as_view(), name='detalhe_evento'),
+    path('evento/<int:pk>', views.EventoDetail, name='detalhe_evento'),
     path('evento/cadastro/', views.EventoCreate.as_view(), name='cadastrar_evento'),
     path('evento/atualização/<int:pk>/', views.EventoUpdate.as_view(), name='atualizar_evento'),
     path('evento/<int:pk>/deletar/',views.EventoDelete.as_view(), name='deletar_evento'),

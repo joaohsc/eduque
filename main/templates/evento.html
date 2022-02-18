@@ -10,5 +10,14 @@
 <body>
     <h1>{{ evento.titulo }}</h1>
     <p>{{ evento.descricao }}</p>
+    {% if request.user not in evento.inscritos.all %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Inscrever-se">
+        </form>
+    {% else %}
+        <p>Inscrito</p>
+    {% endif %}
 </body>
 </html>

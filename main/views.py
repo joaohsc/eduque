@@ -179,12 +179,28 @@ class AulaDelete(DeleteView):
     success_url = reverse_lazy('listagem_materia')
 
 #views da classe Evento
-@method_decorator(login_required(login_url='login'), name='dispatch')
-@method_decorator(allowed_users(allowed_roles=['administrador', 'aluno']), name='dispatch') 
-class EventoDetail(generic.DetailView):
-    model = Evento
-    template_name = 'evento.html'
-    queryset_name = 'evento'
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['administrador', 'aluno'])
+def EventoDetail(request, pk):
+    if request.method == "POST":
+        form = InscriaoEvento(request.POST)
+        if form.is_valid():
+            evento = get_object_or_404(Evento, pk=pk)
+            evento.inscritos.add(request.user)
+        return redirect('detalhe_evento', pk=pk)
+
+    if request.user.groups.exists():
+        evento = get_object_or_404(Evento, id=pk) 
+        context={
+            'evento' : evento,
+        }
+        group = request.user.groups.all()[0].name
+        if group == 'aluno':
+            return render(request, 'evento.html', context)
+        else:
+            return render(request, 'evento.html', context)
+    else:
+        return redirect('login')
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador', 'aluno']), name='dispatch') 
