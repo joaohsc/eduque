@@ -15,55 +15,31 @@
                 <div class="col-md-12 mb-5">
                     <div class="d-flex justify-content-between">
                         <h3 class="emain-title">Matérias</h3>
-                        <a class="ebuttontiny" href="cadastro/prof_materia_cadastro.html">Cadastrar Matéria</a>
+                        <a class="ebuttontiny" href="{% url 'cadastrar_materia' %}">Cadastrar Matéria</a>
                     </div>
 
                 </div>
+                {% for m in materias %}
                 <div class="col-md-4 mb-4">
                     <div class="materia-card">
-                        <img class="materia-img mb-3" src="/static/media/logo-rosa-s.png" alt="logo-eduque">
-                        <h4>Marketing Digital</h4>
-                        <p class="txt-e-black">Some quick example text to build on the card title and make up the
-                            bulk of the card's content.</p>
+                        <img class="materia-img mb-3" src="{{m.imagem.url}}" alt="logo-eduque">
+                        <h4>{{m.titulo}}</h4>
+                        <p class="txt-e-black">{{m.descricao}}</p>
                         <div class="btn-box d-flex justify-content-between">
-                            <a class="ebuttontiny" href="aula.html">Iniciar</a>
+                            <a class="ebuttontiny" href="{% url 'listagem_curso' m.id %}">Iniciar</a>
                             <div>
                                 <button type="button" class="btn">
-                                    <img src="/static/media/edit.png" alt="logo-eduque">
+                                    <a href="{% url 'atualizar_materia' m.id %}"><img src="{% static '/media/edit.png' %}" alt="logo-eduque"></a>
                                 </button>
                                 <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
-                                    <img src="/static/media/trash.png" alt="logo-eduque">
+                                    <a href="{% url 'deletar_materia' m.id %}"><img src="{% static '/media/trash.png' %}" alt="logo-eduque"></a>
+                                    
                                 </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Exclusão</h5>
-                                                <button type="button" class="btn close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Você realmente deseja excluir "Marketing Digital"?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn-eduque-normal"
-                                                    data-dismiss="modal">Não</button>
-                                                <button type="button" class="btn ">Sim</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
+                {% endfor %}
             </div>
         </section>
         <footer class="bg-w-color main-footer d-flex justify-content-center txt-e-black"><span>2017–2021

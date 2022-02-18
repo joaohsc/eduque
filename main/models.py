@@ -59,7 +59,6 @@ class Evento(models.Model):
     link = models.CharField("Site do evento",max_length=300)
     imagem = models.ImageField(upload_to='materia/', verbose_name="imagem", blank=True)
     inscritos = models.ManyToManyField(User, blank=True)
-    num_inscritos = models.IntegerField(verbose_name="Número de Inscritos", default=0)
 
     def get_absolute_url(self):
         return reverse('detalhe_evento', kwargs={'pk' : self.pk})

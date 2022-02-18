@@ -1,0 +1,38 @@
+{% extends 'shared/aluno_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head_links %}
+<link rel="stylesheet" href="{% static '/css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="corpo">
+    {% include 'shared/aluno_navbar.html' %}
+    <section class="corpo-main">
+        <section class="mains-padding main-section bg-w-color d-flex justify-content-center ">
+
+            <div class="login-box ">
+                <div class="login-paginate mb-5">
+                    <a class="elink-paginate" href="{% url 'listagem_materia' %}">Voltar para os eventos</a>
+                </div>
+                <div class="text-center">
+                    
+                    <h4 class="mb-3">Você deseja excluir "{{evento.titulo}}?"</h4>
+                </div>
+
+                <div class="login-input">
+                    <form action="" method="post" enctype="multipart/form-data">       
+                        {% csrf_token %}                 
+                        <button type="submit" class="btn-eduque btn-login btn-eduque-hover">Excluir</button>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+        <footer class="bg-w-color main-footer d-flex justify-content-center txt-e-black"><span>2017–2021
+                Eduque</span>
+        </footer>
+    </section>
+</section>
+{% endblock %}

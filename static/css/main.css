@@ -88,6 +88,7 @@ body {
 }
 .menu{
     width:15vw;
+    padding:15px;
 }
 .corpo-main{
     width:95vw;
@@ -95,7 +96,8 @@ body {
 
 .menu-ul{
     list-style-type: none;
-    padding:0;
+    padding:0px;
+    
 }
 
 .menu-list{

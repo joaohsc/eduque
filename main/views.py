@@ -87,6 +87,7 @@ def MateriaList(request):
         if group == 'aluno':
             return render(request, 'aluno/aluno_materia.html', context)
         else:
+            print('ooooooooopa')
             return render(request, 'professor/prof_materia.html', context)
     else:
         return redirect('login')
@@ -116,20 +117,22 @@ def CursoList(request, materia_id):
 class MateriaCreate(CreateView):
     model = Materia
     fields = ['titulo', 'descricao', 'imagem']
-    template_name = 'aula_form.html'
+    template_name = 'professor/prof_materia_cadastro.html'
+    success_url = reverse_lazy('listagem_materia')
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador']), name='dispatch') 
 class MateriaUpdate(UpdateView):
     model = Materia
     fields = ['titulo', 'descricao', 'imagem']
-    template_name = 'aula_form.html'
+    template_name = 'professor/prof_materia_cadastro.html'
+    success_url = reverse_lazy('listagem_materia')
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador']), name='dispatch')   
 class MateriaDelete(DeleteView):
     model = Materia
-    template_name = 'aula_form.html'
+    template_name = 'professor/prof_materia_exclusao.html'
     success_url = reverse_lazy('listagem_materia')
 
 #views da classe Curso
@@ -161,21 +164,30 @@ def AulaList(request, materia_id, curso_id):
 class CursoCreate(CreateView):
     model = Curso
     fields = ['titulo', 'descricao', 'imagem', 'materia']
-    template_name = 'aula_form.html'
+    template_name = 'professor/prof_cursos_cadastro.html'
+    success_url = reverse_lazy('listagem_materia')
+    def get_success_url(self, **kwargs):
+        # obj = form.instance or self.object
+        return reverse("listagem_curso", kwargs={'materia_id': self.object.materia.id})
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador']), name='dispatch') 
 class CursoUpdate(UpdateView):
     model = Curso
     fields = ['titulo', 'descricao', 'imagem', 'materia']
-    template_name = 'aula_form.html'
+    template_name = 'professor/prof_cursos_cadastro.html'
+    def get_success_url(self, **kwargs):
+        # obj = form.instance or self.object
+        return reverse("listagem_curso", kwargs={'materia_id': self.object.materia.id})
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador']), name='dispatch')  
 class CursoDelete(DeleteView):
     model = Curso
-    template_name = 'aula_form.html'
-    success_url = reverse_lazy('listagem_materia')
+    template_name = 'professor/prof_cursos_exclusao.html'
+    def get_success_url(self, **kwargs):
+        # obj = form.instance or self.object
+        return reverse("listagem_curso", kwargs={'materia_id': self.object.materia.id})
 
 #views da classe Aula
 @login_required(login_url='login')
@@ -206,54 +218,50 @@ def AulaDetail(request, materia_id, curso_id, aula_id):
 class AulaCreate(CreateView):
     model = Aula
     fields = ['titulo', 'descricao', 'link', 'conteudo', 'imagem', 'curso']
-    template_name = 'aula_form.html'
+    template_name = 'professor/prof_aula_cadastro.html'
+    def get_success_url(self, **kwargs):
+        # obj = form.instance or self.object
+        return reverse("listagem_aula", kwargs={'materia_id': self.object.curso.materia.id, 'curso_id': self.object.curso.id})
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador']), name='dispatch') 
 class AulaUpdate(UpdateView):
     model = Aula
     fields = ['titulo', 'descricao', 'link', 'conteudo', 'imagem', 'curso']
-    template_name = 'aula_form.html'
+    template_name = 'professor/prof_aula_cadastro.html'
+    def get_success_url(self, **kwargs):
+        # obj = form.instance or self.object
+        return reverse("listagem_aula", kwargs={'materia_id': self.object.curso.materia.id, 'curso_id': self.object.curso.id})
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador']), name='dispatch') 
 class AulaDelete(DeleteView):
     model = Aula
-    template_name = 'aula_form.html'
-    success_url = reverse_lazy('listagem_materia')
+    template_name = 'professor/prof_aula_exclusao.html'
+    def get_success_url(self, **kwargs):
+        # obj = form.instance or self.object
+        return reverse("listagem_aula", kwargs={'materia_id': self.object.curso.materia.id, 'curso_id': self.object.curso.id})
 
 #views da classe Evento
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['administrador', 'aluno'])
 def EventoDetail(request, pk):
     if request.user.groups.exists():
+        
         evento = get_object_or_404(Evento, id=pk) 
         context={
             'evento' : evento,
         }
         group = request.user.groups.all()[0].name
         if group == 'aluno':
+            if request.method == "POST":
+                form = InscriaoEvento(request.POST)
+                if form.is_valid():
+                    evento.inscritos.add(request.user)
+                return redirect('detalhe_evento', pk=pk)
             return render(request, 'aluno/aluno_inscricao.html', context)
         else:
             return render(request, 'professor/prof_inscricao.html', context)
-    else:
-        return redirect('login')
-
-@login_required(login_url='login')
-@allowed_users(allowed_roles=['administrador', 'aluno'])
-def InscricaoList(request):
-    #EXEMPLO APENAS PARA PREENCHER A PÁGINA DE LISTA DE INSCRIÇÕES
-
-    if request.user.groups.exists():
-        eventos = Evento.objects.all() 
-        context={
-            'eventos' : eventos,
-        }
-        group = request.user.groups.all()[0].name
-        if group == 'aluno':
-            return render(request, 'aluno/aluno_inscricoes.html', context)
-        else:
-            return render(request, 'professor/prof_inscricoes.html', context)
     else:
         return redirect('login')
 
@@ -279,18 +287,20 @@ def EventoList(request):
 class EventoCreate(CreateView):
     model = Evento
     fields = ['titulo','data', 'descricao', 'link', 'imagem']
-    template_name = 'aula_form.html'
+    template_name = 'professor/prof_evento_cadastro.html'
+    success_url = reverse_lazy('listagem_evento')
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador']), name='dispatch') 
 class EventoUpdate(UpdateView):
     model = Evento
     fields = ['titulo','data', 'descricao', 'link', 'imagem']
-    template_name = 'aula_form.html'
+    template_name = 'professor/prof_evento_cadastro.html'
+    success_url = reverse_lazy('listagem_evento')
 
 @method_decorator(login_required(login_url='login'), name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['administrador']), name='dispatch') 
 class EventoDelete(DeleteView):
     model = Evento
-    template_name = 'aula_form.html'
+    template_name = 'professor/prof_evento_exclusao.html'
     success_url = reverse_lazy('listagem_evento')

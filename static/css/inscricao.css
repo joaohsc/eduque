@@ -10,3 +10,10 @@
     padding-left: 20px;
     max-width: 800px;
 }
+
+.inscrito-eduque{
+    background-image: linear-gradient(to right, #FAAD96,#F97C90 , #F84988)!important;
+    color: #ffffff;
+    border-radius: 6px;
+    padding: 20px;
+}

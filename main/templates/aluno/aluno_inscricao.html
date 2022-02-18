@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block head_links %}
-    <link rel="stylesheet" href="{% static '/css/login.css' %}">
-    <link rel="stylesheet" href="{% static '/css/inscricao.css' %}">
+<link rel="stylesheet" href="{% static '/css/login.css' %}">
+<link rel="stylesheet" href="{% static '/css/inscricao.css' %}">
 {% endblock %}
 
 
@@ -30,11 +30,16 @@
         <section class="mains-padding main-section bg-w-color d-flex justify-content-center ">
             <div class="login-box ">
 
-                <div class="login-input">
-                    <form action="" method="POST">
-                        <!-- INSERIR FORM -->
+                <div class="login-input text-center">
+                    {% if request.user not in evento.inscritos.all %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form }}
                         <button type="submit" class="btn-eduque btn-login btn-eduque-hover">Me inscrever</button>
                     </form>
+                    {% else %}
+                    <h3 class="inscrito-eduque">Inscrito!</h3>
+                    {% endif %}
                 </div>
             </div>
 

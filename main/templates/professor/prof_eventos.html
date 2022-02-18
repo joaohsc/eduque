@@ -1,114 +1,50 @@
-<!DOCTYPE html>
-<html>
+{% extends 'shared/aluno_base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- compartilhado -->
-    <link rel="stylesheet" href="/static/css/main.css">
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+{% block head_links %}
+<link rel="stylesheet" href="{% static '/css/materia.css' %}">
+{% endblock %}
 
-    <!-- *único -->
-    <link rel="stylesheet" href="/static/css/materia.css">
+{% block content %}
 
-</head>
-
-<body>
-
-    <section class="corpo">
-        <section class="menu bg-gp-color">
-            <img class="m-2 nav-logo" src="/static/media/logo-f.png" alt="logo-eduque">
-            <ul class="menu-ul">
-                <li class="menu-list"><a class="elink-menu" href="prof-materia.html"><img class="menu-icon"
-                            src="/static/media/materia.png" alt="icone-home"> Matéria</a></li>
-                <li class="menu-list"><a class="elink-menu" href="prof-evento.html"><img class="menu-icon"
-                            src="/static/media/evento.png" alt="icone-home"> Evento</a></li>
-                <li class="menu-list"><a class="elink-menu" href="prof-perfil.html"><img class="menu-icon"
-                            src="/static/media/people.png" alt="icone-home"> Meu perfil</a></li>
-                <li class="menu-list"><a class="elink-menu" href="login.html"><img class="menu-icon"
-                            src="/static/media/sair.png" alt="icone-home"> Sair</a></li>
-            </ul>
-        </section>
-        <section class="corpo-main">
-            <section class="mains-padding main-section bg-w-color">
-                <div class="row">
-                    <div class="col-md-12 mb-5">
-                        <div class="d-flex justify-content-between">
-                            <h3 class="emain-title">Eventos</h3>
-                            <div>
-                                <a class="ebuttontiny" href="prof_inscricoes.html">Inscrições</a>
-                                <a class="ebuttontiny" href="prof_evento_cadastro.html">Cadastrar Evento</a>
-                            </div>
-                            
-                        </div>
-
+<section class="corpo">
+    {% include 'shared/aluno_navbar.html' %}
+    <section class="corpo-main">
+        <section class="mains-padding main-section bg-w-color">
+            <div class="row">
+                <div class="col-md-12 mb-5">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="emain-title">Eventos</h3>
+                        <a class="ebuttontiny" href="{% url 'cadastrar_evento' %}">Cadastrar Evento</a>
                     </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="materia-card">
-                            <img class="materia-img mb-3" src="/static/media/logo-rosa-s.png" alt="logo-eduque">
-                            <h5>25 de Jan - 02 de Fev</h5>
-                            <h4>Marketing Digital</h4>
-                            <p class="txt-e-black">Some quick example text to build on the card title and make up the
-                                bulk of the card's content.</p>
-                            <div class="btn-box d-flex justify-content-between">
-                                <a class="ebuttontiny" href="prof_inscricao.html">Inscrever-se</a>
-                                <div>
-                                    <button type="button" class="btn">
-                                        <img src="/static/media/edit.png" alt="logo-eduque">
-                                    </button>
-                                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
-                                        <img src="/static/media/trash.png" alt="logo-eduque">
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Exclusão</h5>
-                                                    <button type="button" class="btn close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Você realmente deseja excluir "Marketing Digital"?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn-eduque-normal"
-                                                        data-dismiss="modal">Não</button>
-                                                    <button type="button" class="btn ">Sim</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            </section>
-            <footer class="bg-w-color main-footer d-flex justify-content-center txt-e-black"><span>2017–2021
-                    Eduque</span>
-            </footer>
+                {% for m in eventos %}
+                <div class="col-md-4 mb-4">
+                    <div class="materia-card">
+                        <img class="materia-img mb-3" src="{{m.imagem.url}}" alt="logo-eduque">
+                        <h5>{{m.data}}</h5>
+                        <h4>{{m.titulo}}</h4>
+                        <p class="txt-e-black">{{m.descricao}}</p>
+                        <div class="btn-box d-flex justify-content-between">
+                            <a class="ebuttontiny" href="{% url 'detalhe_evento' m.id %}">Visualizar</a>
+                            <div>
+                                <button type="button" class="btn">
+                                    <a href="{% url 'atualizar_evento' m.id %}"><img src="{% static '/media/edit.png' %}" alt="logo-eduque"></a>
+                                </button>
+                                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                                    <a href="{% url 'deletar_evento' m.id %}"><img src="{% static '/media/trash.png' %}" alt="logo-eduque"></a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </section>
+        <footer class="bg-w-color main-footer d-flex justify-content-center txt-e-black"><span>2017–2021
+                Eduque</span>
+        </footer>
     </section>
+</section>
 
-    <!-- compartilhado -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+{% endblock %}

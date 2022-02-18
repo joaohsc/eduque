@@ -17,24 +17,14 @@
                     <a class="elink-paginate" href="{% url 'listagem_materia' %}">Voltar para as matérias</a>
                 </div>
                 <div class="text-center">
-                    {% if 'cadastrar' in request.build_absolute_uri %}
-                    <h3 class="mb-3">Cadastrar Matéria</h3>
-                    {% else %}
-                    <h3 class="mb-3">Editar Matéria</h3>
-                    {% endif %}
+                    
+                    <h4 class="mb-3">Você deseja excluir "{{materia.titulo}}?"</h4>
                 </div>
 
                 <div class="login-input">
-                    <form action="" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        <!-- João, aqui é só um exemplo, faça um template desses por acão = aula_update, aula_delete... -->
-                        <br>
-                        {% if 'cadastrar' in request.build_absolute_uri %}
-                        <button type="submit" class="btn-eduque btn-login btn-eduque-hover">Criar</button>
-                        {% else %}
-                        <button type="submit" class="btn-eduque btn-login btn-eduque-hover">Editar</button>
-                        {% endif %}
+                    <form action="" method="post" enctype="multipart/form-data">       
+                        {% csrf_token %}                 
+                        <button type="submit" class="btn-eduque btn-login btn-eduque-hover">Excluir</button>
                     </form>
                 </div>
             </div>
