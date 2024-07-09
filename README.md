@@ -1,2 +1,2 @@
 # eduque
-projeto pra ufrn
+Projeto de uma plataforma educacional desenvolvido para a disciplina banco de dados para internet(UFRN).
